@@ -366,7 +366,47 @@ int b = 16/2 => int b = 16 >> 1
 
 ### 八、 计算机网络
 
+1. TCP和UDP的区别
 
+   传输控制协议（TCP，Transmission Control Protocol），用户数据报协议（UDP，User Datagram Protocol）。
+
+   |              | TCP(Transmission Control Protocol)                           | UDP(User Datagram Protocol)                                  |
+   | :----------: | :----------------------------------------------------------- | ------------------------------------------------------------ |
+   | 是否持续连接 | 建立持续连接                                                 | 不建立持续连接                                               |
+   |  传输可靠性  | 高                                                           | 低                                                           |
+   |   传输速度   | 慢                                                           | 快                                                           |
+   |   常受攻击   | 拒绝服务攻击（DoS, Denial of Service）针对分布式的拒绝服务攻击（DDoS, Distributed Denial of Service）、CC攻击（Challenge Collapsar，发送大量貌似合理的请求，耗费系统资源而不是连接池），处理的方法是服务降级或区别服务 | UDP Flood攻击，类似于拒绝服务攻击                            |
+   |     优点     | 可靠，稳定，通过三次握手建立连接，再通过四次挥手断开连接     | 传输速度快，不需要建立连接，比TCP稍安全，也是无状态的传输协议 |
+   |     缺点     | 慢，效率低，占用系统资源高                                   | 不可靠，容易丢包                                             |
+   |     用途     | 对安全性和数据完整性要求高的应用                             | 对实时性要求高，对安全性和完整性要求低的应用，如视频流传输（直播） |
+
+   
+
+2. TCP的三次握手和四次挥手
+
+三次握手是TCP建立连接的过程，TCP的请求都是主动的。
+
+(1) 客户端发送[SYN=1, seq=x]给服务器端，其中SYN=1表示“请求建立新连接”，x一般为1；
+
+(2) 服务器端发送[SYN=1, ack=x+1, seq=y]给客户端，其中ack=x+1表示自己已同意建立新连接；
+
+(3) 客户端发送[SYN=1, ack=y+1, seq=x+1]，其中ack=y+1表示自己已知晓服务器端同意建立连接。
+
+在客户端与服务器端传输的TCP报文中，双方的确认号Ack和序号Seq的值，都是在彼此Ack和Seq值的基础上进行计算的，这样做保证了TCP报文传输的连贯性。一旦出现某一方发出的TCP报文丢失，便无法继续"握手"，以此确保了"三次握手"的顺利完成。
+
+![img](https://pics1.baidu.com/feed/d8f9d72a6059252d20d93b0a6645fb3e59b5b9d2.jpeg?token=c86d4509157378798ebbccbe843486d1&s=9746F8123F5754CA48D574DA0300D0B2)
+
+![img](https://pics2.baidu.com/feed/838ba61ea8d3fd1f488fcc3a6790dd1a94ca5f0b.jpeg?token=b04e8b986fcc6303a2871b92b6e7e44a&s=0450E432491271CA18ED00CF0300E0B1)
+
+
+
+在四次挥手是从客户端开始的，过程：
+
+(1) 
+
+![img](https://pics5.baidu.com/feed/48540923dd54564e5260495ce0006487d0584fb6.jpeg?token=c3a743af38e25ff66deb6a07891be58e&s=C584FC1A71CFF4EE1A75A45203007073)
+
+![img](https://pics5.baidu.com/feed/48540923dd54564e5260495ce0006487d0584fb6.jpeg?token=c3a743af38e25ff66deb6a07891be58e&s=C584FC1A71CFF4EE1A75A45203007073)
 
 ### 九、 数据库（MySQL、Oracle）
 
